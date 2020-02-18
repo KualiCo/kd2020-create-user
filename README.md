@@ -2,17 +2,46 @@
 
 A netlify function to create a user on a Kuali Build workflow step.
 
-You'll need to setup the following environment variables in the netlify
-deployment configuration screen.
+## Prerequistes
+
+- A [netlify](netlify.com) account
+- A Build App that has at least an "Email" field and a "Short Text" field that will represent the user's display name
+
+For local development:
+
+- [nodejs](https://nodejs.org/en/)
+
+## Setup
+
+Once you have a netlify account, you'll need to create a new site from git
+(make sure you have forked this repo to your own account). Connect your git
+provider, select the repo where you host this. When it asks you for environment
+variables, you'll need to set up the following options:
 
 - `KUALI_HOST` - The host of the Kuali tenant to create the users for. e.g. `https://monsters.kuali.co`
 - `EMAIL_KEY` - The key for your email field on your form (under advanced configuration for the gadget)
 - `NAME_KEY` - The key for the name field on your form (under advanced configuration for the gadget)
 - `PASSWORD` - The password to set for the user. e.g. `kd2020build`
 
-When you create the integration in Build, you'll need to use the host that
-netlify gives you, plus the path to the function. e.g. `https://your-netlify-app-domain.netlify.com/.netlify/functions/create-sandbox-users`
+In addition to those options, you'll need to create an API token for an "admin"
+user in your environment at `KUALI_HOST` that will be responsible for creating
+users through the Kuali APIs.
 
-You'll also need to create an API token in your target instance from a user
-that is an `admin` (as those are the only users that have access to create users
-with emails and passwords).
+Once that's done, you'll be given a host where your netlify app is hosted. The
+URL you'll need to put into your integration will be something like:
+
+`https://{your-netlify-app-domain}.netlify.com/.netlify/functions/create-user`
+
+Next, you'll need to create a System API integration in your Kuali Build
+environment.
+
+- _Type of Integration_: Send Data
+- _HTTP Method_: POST
+- _Integration URL_: http://{your-netlify-app-domain}.netlify.com/.netlify/functions/create-user
+- _Authentication Type_: Bearer Authentication
+- _API Key Header_: Authorization
+- _API Key_: {your API token}
+
+Once that's configured, you should be able to add the integration step in your
+workflow and select the integration that you just created, and you should be
+set!
