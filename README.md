@@ -1,4 +1,4 @@
-# kd2020-sandbox-users
+# create-user-integration
 
 A netlify function to create a user on a Kuali Build workflow step.
 
