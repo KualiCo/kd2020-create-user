@@ -9,21 +9,19 @@ exports.handler = async (event, context) => {
   if (!authorization) return { statusCode: 401 }
   const token = authorization.replace(/^bearer\s+/i, '')
   if (!token) return { statusCode: 401 }
+
   const body = JSON.parse(event.body)
   const email = body[EMAIL_KEY]
   const name = body[NAME_KEY]
-  const createUserURL = `${KUALI_HOST}/api/v1/users`
   const user = {
     name,
     email,
     password: PASSWORD
   }
+  const createUserURL = `${KUALI_HOST}/api/v1/users`
   const headers = {
     Authorization: `Bearer ${token}`
   }
-  const response = await axios.post(createUserURL, user, { headers })
-  return {
-    statusCode: 200,
-    body: 'ok'
-  }
+  await axios.post(createUserURL, user, { headers })
+  return { statusCode: 204 }
 }
