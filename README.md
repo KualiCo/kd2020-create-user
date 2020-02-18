@@ -35,12 +35,12 @@ URL you'll need to put into your integration will be something like:
 Next, you'll need to create a System API integration in your Kuali Build
 environment.
 
-- _Type of Integration_: Send Data
-- _HTTP Method_: POST
-- _Integration URL_: http://{your-netlify-app-domain}.netlify.com/.netlify/functions/create-user
-- _Authentication Type_: Bearer Authentication
-- _API Key Header_: Authorization
-- _API Key_: {your API token}
+- **Type of Integration**: Send Data
+- **HTTP Method**: POST
+- **Integration URL**: http://{your-netlify-app-domain}.netlify.com/.netlify/functions/create-user
+- **Authentication Type**: Bearer Authentication
+- **API Key Header**: Authorization
+- **API Key**: {your API token}
 
 Once that's configured, you should be able to add the integration step in your
 workflow and select the integration that you just created, and you should be
