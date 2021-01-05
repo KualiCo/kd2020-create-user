@@ -7,7 +7,7 @@
     "start:dev": "netlify dev"
   },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.21.1"
   },
   "devDependencies": {
     "netlify-cli": "^2.32.0"
